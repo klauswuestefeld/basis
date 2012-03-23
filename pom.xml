@@ -1,9 +1,53 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>basis</groupId>
 	<artifactId>basis</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<name>Basis</name>
+
+	<profiles>
+		<profile>
+			<id>to-release</id>
+
+			<build>
+				<resources>
+					<resource>
+						<directory>src</directory>
+						<excludes>
+							<exclude>**/*.java</exclude>
+							<exclude>**/tests/*</exclude>
+						</excludes>
+					</resource>
+				</resources>
+				
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-compiler-plugin</artifactId>
+							<configuration>
+								<source>1.6</source>
+								<target>1.6</target>
+								<encoding>utf-8</encoding>
+								<excludes>
+									<exclude>**/tests/*</exclude>
+								</excludes>
+								<testIncludes>
+									<include>**/tests/*</include>
+								</testIncludes>
+							</configuration>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+
+
+
+		</profile>
+	</profiles>
+
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -16,30 +60,35 @@
 			<groupId>org.jmock</groupId>
 			<artifactId>jmock-junit4</artifactId>
 			<version>2.5.1</version>
+			<!-- <scope>test</scope> -->
+			<scope>compile</scope>
 		</dependency>
+
+
+
 	</dependencies>
-	
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-        <resources>
-            <resource>
-                <directory>src</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </resource>
-        </resources>
+		<resources>
+			<resource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
 
-        <testSourceDirectory>src</testSourceDirectory>
+		<testSourceDirectory>src</testSourceDirectory>
 		<testResources>
-            <testResource>
-                <directory>src</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </testResource>
-        </testResources>
-		
+			<testResource>
+				<directory>src</directory>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</testResource>
+		</testResources>
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
